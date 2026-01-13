@@ -16,7 +16,6 @@ function renderText(){
 
     const newFragment = document.createDocumentFragment();
     for (const char of state.text){
-        // console.log("letter you needed was: ", char);
         const span = document.createElement('span');
         span.textContent = char;
         span.className = 'baseColor';
@@ -30,7 +29,6 @@ function renderText(){
 }
 
 renderText();
-console.log(state.index);
 let timeEl = document.getElementById('time');
 let test_time_duration = 15;
 
@@ -42,11 +40,7 @@ function startTimer(){
             finishTest();
     }
         timeEl.textContent = ` ${test_time_duration - time_elapsed_in_sec}s`;
-        console.log("time elapsed: ",time_elapsed_in_sec);
     }, 1000);
-    
-    // console.log("timerrrrrr", timer);
-
 }
 
 function finishTest(){
@@ -56,30 +50,27 @@ function finishTest(){
         typingArea.classList.add('dimAll');
         stopTimer();
         stats();
-        console.log("stop test!!! and stop the timer");
 
 }
 function stopTimer(){
         clearInterval(timerID);
         timerID = null;
 }
+let wpmEl = document.getElementById('wpm');
+let accuracyEL = document.getElementById('accuracy');
+
+
 
 function stats(){
     let correctLetters = state.index - state.errors;
-    console.log("corrctly typed",correctLetters);
-
     let time_elapsedMsec = Date.now() - state.startTime;
     let time_elapsedMin= time_elapsedMsec/60000;
 
     if (time_elapsedMin >0){
         let wpm = Math.round((correctLetters / 5)/ (time_elapsedMin));
-        console.log("wpm is>>>>>>>>>>>", wpm);
-        let wpmEl = document.getElementById('wpm');
         wpmEl.textContent = `WPM : ${wpm}`;
         let accuracy = Math.round((correctLetters / state.index)*100);
-        let accuracyEL = document.getElementById('accuracy');
         accuracyEL.textContent = `Accuracy : ${accuracy}%`;
-        console.log("Accuracy>>>>",accuracy, state.errors);
     }
     
     
@@ -95,7 +86,6 @@ function handleKeyDown(j,t){
     if (state.startTime === null){
         const t = Date.now();
         state.startTime = t;
-        console.log(t,state.startTime);
         startTimer();
         
     }
@@ -104,7 +94,6 @@ function handleKeyDown(j,t){
         if (state.index > 0){
             state.index--;
             span = charOfSpans[state.index];
-            console.log(span, "you are backspacing!!!!!");
             if (span.classList.contains('incorrect')){
                 state.errors--;
             };
@@ -122,23 +111,13 @@ function handleKeyDown(j,t){
 
     if(typed_letter === expectedLetter){
         span.classList.replace('baseColor','correct');
-        
-        console.log("from match", state.index);
 
-        console.log("its a match:)",typed_letter,expectedLetter);
-        console.log("from match", state.index);
     }
     else{
         span.classList.replace('baseColor','incorrect');
-        console.log("not a match!!!", typed_letter, expectedLetter);
-        console.log("from not match",state.index);
         state.errors++;
-        console.log("errors......", state.errors);
     }
-    // console.log("key expected: ",expectedLetter)
-    // console.log("key you pressed: ", j.key);
     state.index++;
-
     updateStatus();
 }
 
@@ -148,8 +127,8 @@ function reset(){
     state.finished = false,
     state.errors = 0,
     timeEl.textContent = test_time_duration + 's';
-    wpmEl.textContent = "";
-    accuracyEL.textContent = "";
+    wpmEl.textContent = `WPM : ${""}`;
+    accuracyEL.textContent = `Accuracy : ${""}`;
 
 
     stopTimer();
