@@ -130,6 +130,8 @@ function reset(){
     wpmEl.textContent = `WPM : ${""}`;
     accuracyEL.textContent = `Accuracy : ${""}`;
 
+    typingArea.classList.remove('dimAll');
+
 
     stopTimer();
     renderText();
