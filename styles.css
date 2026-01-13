@@ -1,0 +1,124 @@
+/* ====== RESET / BASE ====== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f0f14;
+    color: #e6e6eb;
+}
+
+/* ====== MAIN LAYOUT ====== */
+main {
+    width: min(1200px, 100%);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* ====== HEADER (STATS) ====== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-items {
+    display: flex;
+    align-items: center;
+    padding: 6px 14px;
+    background: #1e1e2e;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* ====== TYPING AREA ====== */
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#textArea {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 80px;
+    padding: 16px;
+    border-radius: 8px;
+    background: #161623;
+    border: 2px solid #2a2a3d;
+
+    font-size: 30px;
+    line-height: 1.5;
+    letter-spacing: 2px;
+
+    outline: none;
+    cursor: text;
+}
+
+/* ====== CHARACTER STATES ====== */
+.baseColor {
+    color: #8a8aa0;
+}
+
+.correct {
+    color: #7A12CA;
+}
+
+.incorrect {
+    color: #ff4d4d;
+}
+
+/* Caret (no layout shift) */
+.current {
+    outline: 2px solid #7A12CA;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* ====== FOOTER ====== */
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#reset {
+    padding: 10px 24px;
+    border-radius: 6px;
+    border: none;
+    background: #7A12CA;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#reset:hover {
+    background: #6310a5;
+}
+
+/* ====== SMOOTH FEEDBACK ====== */
+.correct,
+.incorrect,
+.current {
+    transition: color 0.15s ease, outline 0.15s ease;
+}
+
+#time{
+    color: rgb(140, 17, 211);
+}
+
+.dimAll{
+    /* background-color: #3333ce; */
+    opacity: 0.4;
+}
